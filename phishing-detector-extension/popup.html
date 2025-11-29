@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phishing Detector</title>
+    <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <img src="icons/icon32.png" alt="Phishing Detector">
+                <h1>Phish Stop - Phishing Detector</h1>
+            </div>
+            <div class="status-indicator" id="statusIndicator">
+                <span class="status-dot"></span>
+                <span class="status-text">Active</span>
+            </div>
+        </header>
+
+        <main>
+            <div class="current-url-section">
+                <h2>Current Page Analysis</h2>
+                <div class="url-display">
+                    <span id="currentUrl">Loading...</span>
+                </div>
+                <div class="analysis-result" id="analysisResult">
+                    <div class="risk-score">
+                        <span class="score-label">Risk Score:</span>
+                        <span class="score-value" id="riskScore">--</span>
+                        <div class="score-bar">
+                            <div class="score-fill" id="scoreFill"></div>
+                        </div>
+                    </div>
+                    <div class="confidence-level">
+                        <span class="confidence-label">Confidence:</span>
+                        <span class="confidence-value" id="confidenceLevel">--</span>
+                    </div>
+                    <div class="detection-methods" id="detectionMethods">
+                        <span class="methods-label">Detection Methods:</span>
+                        <div class="methods-list" id="methodsList"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="actions-section">
+                <button class="action-btn primary" id="analyzeBtn">
+                    <span class="btn-icon">🔍</span>
+                    Analyze Current Page
+                </button>
+                <button class="action-btn secondary" id="reportBtn">
+                    <span class="btn-icon">⚠️</span>
+                    Report Phishing
+                </button>
+            </div>
+
+            <div class="statistics-section">
+                <h2>Detection Statistics</h2>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <span class="stat-value" id="totalAnalyzed">0</span>
+                        <span class="stat-label">URLs Analyzed</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value" id="phishingDetected">0</span>
+                        <span class="stat-label">Phishing Detected</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value" id="avgRiskScore">0</span>
+                        <span class="stat-label">Avg Risk Score</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="settings-section">
+                <h2>Settings</h2>
+                <div class="setting-item">
+                    <label class="setting-label">
+                        <input type="checkbox" id="realTimeProtection" checked>
+                        <span class="checkmark"></span>
+                        Real-time Protection
+                    </label>
+                </div>
+                <div class="setting-item">
+                    <label class="setting-label">
+                        <input type="checkbox" id="blockPages" checked>
+                        <span class="checkmark"></span>
+                        Block Suspicious Pages
+                    </label>
+                </div>
+                <div class="setting-item">
+                    <label class="setting-label">
+                        <input type="checkbox" id="showWarnings" checked>
+                        <span class="checkmark"></span>
+                        Show Warning Messages
+                    </label>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <div class="footer-content">
+                <span class="version">v1.0.0</span>
+                <a href="#" class="help-link" id="helpLink">Help & Support</a>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Report Modal -->
+    <div class="modal" id="reportModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Report Phishing Site</h3>
+                <button class="close-btn" id="closeModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="reportForm">
+                    <div class="form-group">
+                        <label for="reportUrl">URL:</label>
+                        <input type="url" id="reportUrl" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="reportReason">Reason:</label>
+                        <select id="reportReason" required>
+                            <option value="">Select a reason...</option>
+                            <option value="fake_login">Fake login page</option>
+                            <option value="credential_theft">Credential theft</option>
+                            <option value="malware_distribution">Malware distribution</option>
+                            <option value="suspicious_content">Suspicious content</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="reportDescription">Description:</label>
+                        <textarea id="reportDescription" rows="3" placeholder="Additional details..."></textarea>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn-secondary" id="cancelReport">Cancel</button>
+                        <button type="submit" class="btn-primary">Submit Report</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="popup.js"></script>
+</body>
+</html>
